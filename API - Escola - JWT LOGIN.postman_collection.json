@@ -1,16 +1,34 @@
 {
 	"info": {
-		"_postman_id": "4e31284d-3855-4750-a8a7-d5dfc3ec8c71",
-		"name": "API - Escola",
+		"_postman_id": "1c40c586-0852-43e3-b76f-ca2532dac5c2",
+		"name": "API - Escola - JWT LOGIN",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "29095255"
+		"_exporter_id": "30167383"
 	},
 	"item": [
 		{
 			"name": "Listar todos os Alunos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE1LCJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbS5iciIsIm5vbWUiOiJKdWFuIiwiaWF0IjoxNzEzNTY4OTIwfQ.KrtnyQn-SyJmkaPaUzkrvM4QLgsQYODyBAoQ6EFPbkY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "http://localhost:3000/alunos",
 					"protocol": "http",
@@ -32,7 +50,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nome\": \"Juan\",\r\n    \"data_nascimento\": \"2001-01-07\",\r\n    \"celular\": \"484949\"\r\n}",
+					"raw": "{   \r\n    \"email\": \"teste@teste.com.br\",\r\n    \"password\": \"123456\",\r\n    \"nome\": \"Juan\",\r\n    \"data_nascimento\": \"2001-01-07\",\r\n    \"celular\": \"484949\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -57,7 +75,13 @@
 			"name": "Listar Aluno",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE1LCJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbS5iciIsIm5vbWUiOiJKdWFuIiwiaWF0IjoxNzEzNTY4OTIwfQ.KrtnyQn-SyJmkaPaUzkrvM4QLgsQYODyBAoQ6EFPbkY",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:3000/alunos/2",
 					"protocol": "http",
@@ -173,6 +197,34 @@
 					"path": [
 						"cursos",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n    \"email\": \"teste@teste.com.br\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"login"
 					]
 				}
 			},
