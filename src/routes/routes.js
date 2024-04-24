@@ -1,6 +1,8 @@
-const { Router, query } = require('express') // 
+ const { Router, query } = require('express') // 
 const Aluno = require('../models/Aluno')
 const Curso = require('../models/Curso')
+const { sign } = require('jsonwebtoken')
+const { auth } = require('../middleware/auth')
 
 const routes = new Router()
 
@@ -8,7 +10,7 @@ routes.get('/bem_vindo', (req, res) => {
     res.json({ name: 'Bem vindo' })
 })
 
-/* ----  Rotas de Login ---- */
+ // ----  Rotas de Login ----  //
 
 routes.post('/login', async (req, res) => {
     try {
@@ -31,14 +33,18 @@ routes.post('/login', async (req, res) => {
             return res.status(404).json({ messagem: 'Nenhum aluno corresponde a email e senha fornecidos!' })
         }
 
-        res.status(200).json({"Esse é teu token JWT: JWT"})
+        const payload = {sub: aluno.id, email: aluno.email, nome: aluno.nome}
+
+        const token = sign(payload, process.env.SECRET_JWT)
+
+        res.status(200).json({Token: token})
 
     } catch (error) {
         return res.status(500).json({ error: error, messagem: 'Algo deu errado!' })
     }
 })
 
-/* ----  Rotas dos Alunos ---- */
+ // ----  Rotas dos Alunos ---- //
 
 routes.post('/alunos', async (req, res) => {
     try {
@@ -76,12 +82,12 @@ routes.post('/alunos', async (req, res) => {
     }
 })
 
-routes.get('/alunos', async (req, res) => {
+routes.get('/alunos', auth, async (req, res) => {
     const alunos = await Aluno.findAll()
     res.json(alunos)
 })
 
-routes.get('/alunos/:id', async (req, res) => {
+routes.get('/alunos/:id', auth, async (req, res) => {
     try {
 
         const { id } = req.params
@@ -103,7 +109,7 @@ routes.get('/alunos/:id', async (req, res) => {
     }
 })
 
-/* ----  Rotas dos Cursos ---- */
+ // ----  Rotas dos Cursos ---- //
 
 routes.post('/cursos', async (req, res) => {
     try {
@@ -192,3 +198,4 @@ routes.put('/cursos/:id', async (req, res) => {
 })
 
 module.exports = routes
+ 

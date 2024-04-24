@@ -19,6 +19,8 @@ const Aluno = connection.define('alunos', {
     }
 })
 
+
+
 module.exports = Aluno
 
 
