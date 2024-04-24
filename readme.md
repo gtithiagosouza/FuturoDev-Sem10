@@ -1,4 +1,7 @@
-# Semana 10 - Introdução ao Sequelize
+
+Exercicios - Semana 10
+
+# Semana 10 - Express Profissional e Segurança - JWT
 
 ## Rodar o repositório:
 
